@@ -28,14 +28,17 @@ class Main():
                     pygame.quit()
                     sys.exit()
 
-            if clicked:
+            #Check whether mouse is clicked or not
+            if clicked: 
                 if event.type == pygame.MOUSEBUTTONUP:
                     clicked = False
 
-            elif event.type == pygame.MOUSEBUTTONDOWN and game.isgameOver == True :
+            #If game is over
+            elif event.type == pygame.MOUSEBUTTONDOWN and game.isgameOver == True : 
                 clicked = True
                 print("Game is already win by ",game.winner)
 
+            #If game is not over and pieces are not initialized
             elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == False:
                 clicked = True
                 mouseX, mouseY = pygame.mouse.get_pos()
@@ -45,6 +48,7 @@ class Main():
                 #placing piece on the board
                 game.initializePiece(clicked_row, clicked_col)
 
+            #If game is not over and pieces are initialized
             elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == True and game.dragger.dragging == False:
                 clicked = True
                 mouseX, mouseY = pygame.mouse.get_pos()
@@ -54,24 +58,28 @@ class Main():
                 #activate dragger
                 game.activate_dragger(clicked_row, clicked_col)
 
+            #If game is not over and pieces are initialized and dragger is activated
             elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == True and game.dragger.dragging == True:
                 clicked = True
                 mouseX, mouseY = pygame.mouse.get_pos()
                 clicked_row = mouseY // SQ_SIZE
                 clicked_col = mouseX // SQ_SIZE
 
+                # clicked on the same square as dragger
                 if game.dragger.col==clicked_col and game.dragger.row==clicked_row:
                     game.deactivate_dragger()
-                    print('Dragger deactivated')
 
+                # clicked on a different square and that square is empty
                 elif game.board[clicked_row][clicked_col] == '':    
                     if game.is_valid_move(clicked_row,clicked_col):
+                        print(f'Piece {game.current_turn} moved')
                         game.move_piece(clicked_row,clicked_col)
-                        print('Piece moved')
                     else:
-                        print('Invalid move')
+                        game.deactivate_dragger()
+                        print('Invalid move: You can only move to an adjacent square')
                 else:
-                    print('Invalid move')
+                    game.deactivate_dragger()
+                    print('Invalid move: You can only move to an empty square')
 
             elif event.type == pygame.MOUSEBUTTONDOWN :
                 clicked = True

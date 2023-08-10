@@ -4,7 +4,7 @@ from dragger import Dragger
 
 class Game:
     def __init__(self):
-        self.current_turn = 'O' # O is the first player
+        self.current_turn = 'O' # O is the first player: white
         self.no_X = 0
         self.no_O = 0
         self.board = [["" for i in range(ROWS)] for j in range(ROWS)] # nxn board
@@ -109,7 +109,8 @@ class Game:
     def deactivate_dragger(self):
         self.dragger.dragging = False
         self.dragger.update_dragger(None,None)
-
+        print('Dragger deactivated')
+        
     def is_valid_move(self,row,col):
         if self.dragger.dragging:
             if self.board[row][col] == '':
@@ -117,8 +118,8 @@ class Game:
         return False
 
     def is_valid_move(self,next_row,next_col):
-        print(self.dragger.row,self.dragger.col)
-        print(next_row,next_col)
+        # print(self.dragger.row,self.dragger.col)
+        # print(next_row,next_col)
         if (next_row in [self.dragger.row-1,self.dragger.row+1]) and next_col == self.dragger.col:
             return True
         elif (next_col in [self.dragger.col-1,self.dragger.col+1]) and next_row == self.dragger.row:
