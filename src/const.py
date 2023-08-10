@@ -1,8 +1,8 @@
-# Screen Dimension
-WIDTH = 600
-HEIGHT = 600
-
 # Board Dimensions
-ROWS=3
-COLS=3
-SQ_SIZE = HEIGHT//ROWS
+ROWS = COLS = 3
+SQ_SIZE = 100
+
+# Screen Dimension
+WIDTH = ROWS * SQ_SIZE
+HEIGHT = COLS * SQ_SIZE
+

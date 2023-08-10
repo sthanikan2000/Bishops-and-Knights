@@ -6,7 +6,7 @@ class Game:
         self.current_turn = 'O' # O is the first player
         self.no_X = 0
         self.no_O = 0
-        self.board = [['','',''],['','',''],['','','']] # 3x3 board
+        self.board = [["" for i in range(ROWS)] for j in range(ROWS)] # nxn board
         self.isPiecesInitialized = False
         self.isgameOver = False
         self.winner = None
@@ -51,33 +51,44 @@ class Game:
                 self.no_O += 1
                 self.current_turn = 'X' #switch turn
 
-            if self.no_X + self.no_O > 4:
+            if self.no_X + self.no_O > 2*(ROWS-1):
                 self.isgameOver = self.check_for_win(current)
                 if self.isgameOver:
                     self.winner = current
                     print(f'{current} wins')
-            if self.no_X + self.no_O == 6:
+            if self.no_X + self.no_O == 2*ROWS:
                 self.isPiecesInitialized = True
         else:
             print('Only one piece can be placed in a square')
             return
-
-        
-        # if self.no_X + self.no_O >= 5:
-        #     self.check_for_win()
-
+    
     def check_for_win(self,player):
         #check for row win
         for row in range(ROWS):
-            if self.board[row][0] == self.board[row][1] == self.board[row][2] == player:
+            for col in range(COLS):
+                if self.board[row][col] != player:
+                    break
+            else:
                 return True
+            
         #check for column win
         for col in range(COLS):
-            if self.board[0][col] == self.board[1][col] == self.board[2][col] == player:
+            for row in range(ROWS):
+                if self.board[row][col] != player:
+                    break
+            else:
                 return True
+            
         #check for diagonal win
-        if self.board[0][0] == self.board[1][1] == self.board[2][2] == player:
+        for i in range(ROWS): #check for left diagonal
+            if self.board[i][i] != player:
+                break
+        else:
             return True
-        if self.board[0][2] == self.board[1][1] == self.board[2][0] == player:
+        for i in range(ROWS): #check for right diagonal
+            if self.board[i][ROWS-i-1] != player:
+                break
+        else:
             return True
+    
         return False
