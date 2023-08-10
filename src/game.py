@@ -8,6 +8,8 @@ class Game:
         self.no_O = 0
         self.board = [['','',''],['','',''],['','','']] # 3x3 board
         self.isPiecesInitialized = False
+        self.isgameOver = False
+        self.winner = None
         self.cross_image = pygame.image.load(os.path.join(f'./img/black_pawn.png'))
         self.dot_image = pygame.image.load(os.path.join(f'./img/white_pawn.png'))
 
@@ -40,14 +42,20 @@ class Game:
 
     def initializePiece(self,row,col):
         if self.board[row][col] == '':
-            self.board[row][col] = self.current_turn
+            current = self.current_turn
+            self.board[row][col] = current
             if self.current_turn == 'X':
                 self.no_X += 1
-                self.current_turn = 'O'
+                self.current_turn = 'O' #switch turn
             else:
                 self.no_O += 1
-                self.current_turn = 'X'
+                self.current_turn = 'X' #switch turn
 
+            if self.no_X + self.no_O > 4:
+                self.isgameOver = self.check_for_win(current)
+                if self.isgameOver:
+                    self.winner = current
+                    print(f'{current} wins')
             if self.no_X + self.no_O == 6:
                 self.isPiecesInitialized = True
         else:
@@ -57,3 +65,23 @@ class Game:
         
         # if self.no_X + self.no_O >= 5:
         #     self.check_for_win()
+
+    def check_for_win(self,player):
+        #check for row win
+        for row in range(ROWS):
+            if self.board[row][0] == self.board[row][1] == self.board[row][2] == player:
+                return True
+
+        #check for column win
+        for col in range(COLS):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] == player:
+                return True
+
+        #check for diagonal win
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] == player:
+            return True
+
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] == player:
+            return True
+
+        return False
