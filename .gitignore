@@ -1,2 +1,14 @@
+# Ignore build and dist directories
+build/
+dist/
+dist.zip
+
+# Ignore spec files
+*.spec
+
 # Ignore _pycache_ directories
 __pycache__/
+
+# Ignore release
+*.iss
+Output/
