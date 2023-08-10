@@ -20,7 +20,9 @@ class Game:
     def show_bg(self,surface): #Here surface is the screen
         for row in range(ROWS):
             for col in range(COLS):
-                if (row+col)%2==0: #if row+col is even
+                if self.dragger.dragging and row== self.dragger.row and col==self.dragger.col:
+                    color = (194,194,210)
+                elif (row+col)%2==0: #if row+col is even
                     color = (234,235,200) #white in RGB format
                 else:
                     color = (119,154,88) #black in RGB format
@@ -110,7 +112,7 @@ class Game:
         self.dragger.dragging = False
         self.dragger.update_dragger(None,None)
         print('Dragger deactivated')
-        
+
     def is_valid_move(self,row,col):
         if self.dragger.dragging:
             if self.board[row][col] == '':
