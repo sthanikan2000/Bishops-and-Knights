@@ -29,24 +29,23 @@ class Main():
                     pygame.quit()
                     sys.exit()
 
-
             if clicked:
                 if event.type == pygame.MOUSEBUTTONUP:
                     clicked = False
 
-            elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == False and game.isgameOver == False :
+            elif event.type == pygame.MOUSEBUTTONDOWN and game.isgameOver == True :
+                clicked = True
+                print("Game is already win by ",game.winner)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == False:
                 clicked = True
                 mouseX, mouseY = pygame.mouse.get_pos()
-
                 clicked_row = mouseY // SQ_SIZE
                 clicked_col = mouseX // SQ_SIZE
 
                 #placing piece on the board
                 game.initializePiece(clicked_row, clicked_col)
             
-            elif event.type == pygame.MOUSEBUTTONDOWN and game.isgameOver == True :
-                clicked = True
-                print("Game is already win by ",game.winner)
             elif event.type == pygame.MOUSEBUTTONDOWN :
                 clicked = True
                 print("Pieces are already placed on the board")
