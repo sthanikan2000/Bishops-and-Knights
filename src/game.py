@@ -71,17 +71,13 @@ class Game:
         for row in range(ROWS):
             if self.board[row][0] == self.board[row][1] == self.board[row][2] == player:
                 return True
-
         #check for column win
         for col in range(COLS):
             if self.board[0][col] == self.board[1][col] == self.board[2][col] == player:
                 return True
-
         #check for diagonal win
         if self.board[0][0] == self.board[1][1] == self.board[2][2] == player:
             return True
-
         if self.board[0][2] == self.board[1][1] == self.board[2][0] == player:
             return True
-
         return False
