@@ -1,5 +1,6 @@
 import pygame,os
 from const import *
+from dragger import Dragger
 
 class Game:
     def __init__(self):
@@ -12,6 +13,8 @@ class Game:
         self.winner = None
         self.cross_image = pygame.image.load(os.path.join(f'./img/black_pawn.png'))
         self.dot_image = pygame.image.load(os.path.join(f'./img/white_pawn.png'))
+
+        self.dragger = Dragger()
 
     #show background sqaures
     def show_bg(self,surface): #Here surface is the screen
@@ -92,3 +95,42 @@ class Game:
             return True
     
         return False
+
+    def activate_dragger(self,row,col):
+        if self.board[row][col] == self.current_turn:
+            self.dragger.dragging = True
+            self.dragger.update_dragger(row,col)
+            print('Dragger activated')
+        elif self.board[row][col] == '':
+            print('Empty square')
+        else:
+            print('You can only move your own piece')
+
+    def deactivate_dragger(self):
+        self.dragger.dragging = False
+        self.dragger.update_dragger(None,None)
+
+    def is_valid_move(self,row,col):
+        if self.dragger.dragging:
+            if self.board[row][col] == '':
+                return True
+        return False
+
+    def is_valid_move(self,next_row,next_col):
+        print(self.dragger.row,self.dragger.col)
+        print(next_row,next_col)
+        if (next_row in [self.dragger.row-1,self.dragger.row+1]) and next_col == self.dragger.col:
+            return True
+        elif (next_col in [self.dragger.col-1,self.dragger.col+1]) and next_row == self.dragger.row:
+            return True
+        return False
+    
+    def move_piece(self,next_row,next_col):
+        self.board[next_row][next_col] = self.current_turn
+        self.board[self.dragger.row][self.dragger.col] = ''
+        self.deactivate_dragger()
+        self.isgameOver = self.check_for_win(self.current_turn)
+        if self.isgameOver:
+            self.winner = self.current_turn
+            print(f'{self.current_turn} wins')
+        self.current_turn = 'O' if self.current_turn == 'X' else 'X' #switch turn

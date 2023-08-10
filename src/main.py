@@ -1,4 +1,4 @@
-import pygame , sys, time
+import pygame , sys
 from const import *
 from game import Game
 
@@ -13,7 +13,6 @@ class Main():
         self.clock = pygame.time.Clock()
 
         self.game = Game()
-
     
     def mainloop(self):
         screen = self.screen
@@ -45,10 +44,38 @@ class Main():
 
                 #placing piece on the board
                 game.initializePiece(clicked_row, clicked_col)
-            
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == True and game.dragger.dragging == False:
+                clicked = True
+                mouseX, mouseY = pygame.mouse.get_pos()
+                clicked_row = mouseY // SQ_SIZE
+                clicked_col = mouseX // SQ_SIZE
+
+                #activate dragger
+                game.activate_dragger(clicked_row, clicked_col)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and game.isPiecesInitialized == True and game.dragger.dragging == True:
+                clicked = True
+                mouseX, mouseY = pygame.mouse.get_pos()
+                clicked_row = mouseY // SQ_SIZE
+                clicked_col = mouseX // SQ_SIZE
+
+                if game.dragger.col==clicked_col and game.dragger.row==clicked_row:
+                    game.deactivate_dragger()
+                    print('Dragger deactivated')
+
+                elif game.board[clicked_row][clicked_col] == '':    
+                    if game.is_valid_move(clicked_row,clicked_col):
+                        game.move_piece(clicked_row,clicked_col)
+                        print('Piece moved')
+                    else:
+                        print('Invalid move')
+                else:
+                    print('Invalid move')
+
             elif event.type == pygame.MOUSEBUTTONDOWN :
                 clicked = True
-                print("Pieces are already placed on the board")
+                print("Nothing to DO")
             pygame.display.update()
             
 
