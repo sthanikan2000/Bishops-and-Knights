@@ -4,15 +4,20 @@ from dragger import Dragger
 
 class Game:
     def __init__(self):
-        self.current_turn = 'O' # O is the first player: white
+        self.current_turn = 'O' # O is the first player: white bishop
         self.no_X = 0
         self.no_O = 0
         self.board = [["" for i in range(ROWS)] for j in range(ROWS)] # nxn board
         self.isPiecesInitialized = False
+
         self.isgameOver = False
         self.winner = None
-        self.cross_image = pygame.image.load(os.path.join(f'./img/black_pawn.png'))
-        self.dot_image = pygame.image.load(os.path.join(f'./img/white_pawn.png'))
+        self.won_config = None
+
+        self.cross_image = pygame.image.load(os.path.join(f'./img/black_knight.png')) # To represent the cross 
+        self.dot_image = pygame.image.load(os.path.join(f'./img/white_bishop.png')) # To represent the dot
+        # self.cross_image=pygame.transform.scale(self.cross_image, (80, 80))
+        # self.dot_image=pygame.transform.scale(self.dot_image, (80, 80))
 
         self.dragger = Dragger()
 
@@ -20,7 +25,15 @@ class Game:
     def show_bg(self,surface): #Here surface is the screen
         for row in range(ROWS):
             for col in range(COLS):
-                if self.dragger.dragging and row== self.dragger.row and col==self.dragger.col:
+                if self.isgameOver and self.won_config[0] == 'row' and self.won_config[1] == row:
+                    color = (255,0,0)
+                elif self.isgameOver and self.won_config[0] == 'col' and self.won_config[1] == col:
+                    color = (255,0,0)
+                elif self.isgameOver and self.won_config[0] == 'left_diagonal' and row == col:
+                    color = (255,0,0)
+                elif self.isgameOver and self.won_config[0] == 'right_diagonal' and row + col == ROWS-1:
+                    color = (255,0,0)
+                elif self.dragger.dragging and row== self.dragger.row and col==self.dragger.col:
                     color = (194,194,210)
                 elif (row+col)%2==0: #if row+col is even
                     color = (234,235,200) #white in RGB format
@@ -74,6 +87,7 @@ class Game:
                 if self.board[row][col] != player:
                     break
             else:
+                self.won_config = ('row',row)
                 return True
             
         #check for column win
@@ -82,6 +96,7 @@ class Game:
                 if self.board[row][col] != player:
                     break
             else:
+                self.won_config = ('col',col)
                 return True
             
         #check for diagonal win
@@ -89,11 +104,13 @@ class Game:
             if self.board[i][i] != player:
                 break
         else:
+            self.won_config = ('left_diagonal',None)
             return True
         for i in range(ROWS): #check for right diagonal
             if self.board[i][ROWS-i-1] != player:
                 break
         else:
+            self.won_config = ('right_diagonal',None)
             return True
     
         return False
@@ -113,19 +130,13 @@ class Game:
         self.dragger.update_dragger(None,None)
         print('Dragger deactivated')
 
-    def is_valid_move(self,row,col):
-        if self.dragger.dragging:
-            if self.board[row][col] == '':
-                return True
-        return False
-
     def is_valid_move(self,next_row,next_col):
-        # print(self.dragger.row,self.dragger.col)
-        # print(next_row,next_col)
         if (next_row in [self.dragger.row-1,self.dragger.row+1]) and next_col == self.dragger.col:
             return True
         elif (next_col in [self.dragger.col-1,self.dragger.col+1]) and next_row == self.dragger.row:
             return True
+        elif (next_row in [self.dragger.row-1,self.dragger.row+1]) or (next_col in [self.dragger.col-1,self.dragger.col+1]):
+            return True 
         return False
     
     def move_piece(self,next_row,next_col):

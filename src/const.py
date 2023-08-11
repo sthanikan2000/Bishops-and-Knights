@@ -1,5 +1,5 @@
 # Board Dimensions
-ROWS = COLS = 3
+ROWS = COLS = 5
 SQ_SIZE = 100
 
 # Screen Dimension
