@@ -1,13 +1,19 @@
-import pygame,os
-
-# from const import *  # ****************************
- 
+import pygame
 from config import Configurations
 from dragger import Dragger
 
 class Game:
+    # A upgraded version of Tic Tac Toe game
+    # Dot (O) is represented by white bishop
+    # Cross (X) is represented by black knight
+    # The game is played on a nxn board
+      
     def __init__(self):
         self.config= Configurations()
+        self.cross_image = self.config.cross # To represent the cross
+        self.dot_image = self.config.dot # To represent the dot
+
+        self.dragger = Dragger()
 
         self.current_turn = 'O' # O is the first player: white bishop
         self.no_X = 0
@@ -17,14 +23,7 @@ class Game:
 
         self.isgameOver = False
         self.winner = None
-        self.won_config = None
-
-        self.cross_image = pygame.image.load(os.path.join(f'./img/black_knight.png')) # To represent the cross 
-        self.dot_image = pygame.image.load(os.path.join(f'./img/white_bishop.png')) # To represent the dot
-        # self.cross_image=pygame.transform.scale(self.cross_image, (80, 80))
-        # self.dot_image=pygame.transform.scale(self.dot_image, (80, 80))
-
-        self.dragger = Dragger()
+        self.won_config = None 
 
     #show background sqaures
     def show_bg(self,surface): #Here surface is the screen
@@ -70,6 +69,7 @@ class Game:
     def initializePiece(self,row,col):
         ROWS = self.config.row
         if self.board[row][col] == '':
+            Configurations.move_sound.play() 
             current = self.current_turn
             self.board[row][col] = current
             if self.current_turn == 'X':
@@ -84,10 +84,13 @@ class Game:
                 if self.isgameOver:
                     self.winner = current
                     print(f'{current} wins')
+                    Configurations.win_sound.play()
             if self.no_X + self.no_O == 2*ROWS:
                 self.isPiecesInitialized = True
+            
         else:
             print('Only one piece can be placed in a square')
+            Configurations.illegal_sound.play() 
             return
     
     def check_for_win(self,player):
@@ -133,10 +136,13 @@ class Game:
             self.dragger.dragging = True
             self.dragger.update_dragger(row,col)
             print('Dragger activated')
+            Configurations.drag_sound.play() 
         elif self.board[row][col] == '':
             print('Empty square')
+            Configurations.illegal_sound.play() 
         else:
             print('You can only move your own piece')
+            Configurations.illegal_sound.play() 
 
     def deactivate_dragger(self):
         self.dragger.dragging = False
@@ -160,5 +166,6 @@ class Game:
         if self.isgameOver:
             self.winner = self.current_turn
             print(f'{self.current_turn} wins')
+            Configurations.win_sound.play()  
         self.current_turn = 'O' if self.current_turn == 'X' else 'X' #switch turn
     
