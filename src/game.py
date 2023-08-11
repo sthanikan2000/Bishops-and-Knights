@@ -1,13 +1,18 @@
 import pygame,os
-from const import *
+
+# from const import *  # ****************************
+ 
+from config import Configurations
 from dragger import Dragger
 
 class Game:
     def __init__(self):
+        self.config= Configurations()
+
         self.current_turn = 'O' # O is the first player: white bishop
         self.no_X = 0
         self.no_O = 0
-        self.board = [["" for i in range(ROWS)] for j in range(ROWS)] # nxn board
+        self.board = [["" for i in range(self.config.col)] for j in range(self.config.row)] # nxn board
         self.isPiecesInitialized = False
 
         self.isgameOver = False
@@ -23,6 +28,10 @@ class Game:
 
     #show background sqaures
     def show_bg(self,surface): #Here surface is the screen
+        ROWS = self.config.row
+        COLS = self.config.col
+        SQ_SIZE = self.config.sq_size
+
         for row in range(ROWS):
             for col in range(COLS):
                 if self.isgameOver and self.won_config[0] == 'row' and self.won_config[1] == row:
@@ -59,6 +68,7 @@ class Game:
                     surface.blit(img,img.get_rect(center=img_center))
 
     def initializePiece(self,row,col):
+        ROWS = self.config.row
         if self.board[row][col] == '':
             current = self.current_turn
             self.board[row][col] = current
@@ -81,6 +91,9 @@ class Game:
             return
     
     def check_for_win(self,player):
+        ROWS = self.config.row
+        COLS = self.config.col
+
         #check for row win
         for row in range(ROWS):
             for col in range(COLS):
@@ -148,3 +161,4 @@ class Game:
             self.winner = self.current_turn
             print(f'{self.current_turn} wins')
         self.current_turn = 'O' if self.current_turn == 'X' else 'X' #switch turn
+    
