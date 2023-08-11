@@ -40,7 +40,7 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 ## Some Gameplay Screenshots
 
 | **Initial Board Look**  | **All the pieces are placed** |
-| - | - |
+| ---- | --- |
 | ![Initial Board Look](gameplay-screenshots/Initial.png)  | ![All the pieces are placed](gameplay-screenshots/all-placed.png)    |
 | **Drag Bishop**  | **Knight WON** |
 | ![Drag Bishop](gameplay-screenshots/drag-bishop.png)  | ![Knight WON](gameplay-screenshots/knight-wins.png)    |
