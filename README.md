@@ -37,6 +37,16 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 - ***Complete game sounds*** from start to end of play which also can be muted.
 - **Planned extension:** *AI opponent for single-player gameplay. i.e., `AI Knight` (coming soon!)*
 
+## Some Gameplay Screenshots
+
+| **Initial Board Look**  | **All the pieces are placed** |
+| - | - |
+| ![Initial Board Look](gameplay-screenshots/Initial.png)  | ![All the pieces are placed](gameplay-screenshots/all-placed.png)    |
+| **Drag Bishop**  | **Knight WON** |
+| ![Drag Bishop](gameplay-screenshots/drag-bishop.png)  | ![Knight WON](gameplay-screenshots/knight-wins.png)    |
+| **Bishop WON**  | **4-dimension GameBoard** |
+| ![Bishop WON](gameplay-screenshots/bishop-wins.png)  | ![4-dimension GameBoard](gameplay-screenshots/4-dimension.png)    |
+
 ## Controls
 - Keyboard inputs for game controls:
   - Press `Q` to Quit the game
