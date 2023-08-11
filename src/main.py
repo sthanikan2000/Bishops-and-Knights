@@ -22,6 +22,9 @@ class Main():
         pressed=False #To check whether key is in pressed state or not
 
         while True:
+            if game.isgameOver == True:
+                pygame.display.set_caption('Press "R" to RESTART')
+
             game.show_bg(screen) # Draw the background squares
 
             #Check whether application is quit by user
