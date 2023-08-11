@@ -55,7 +55,7 @@ class Main():
                         game.config.change_dimensions('decrease')
                         screen = pygame.display.set_mode((Configurations.width,Configurations.height))
                         game=Game()
-                        
+
                     elif event.key == pygame.K_m:
                         Sound.mute = not Sound.mute
                         if Sound.mute:
@@ -130,7 +130,6 @@ class Main():
                     Configurations.illegal_sound.play()                    
             pygame.display.update()
             
-
 
 main=Main()
 main.mainloop()
