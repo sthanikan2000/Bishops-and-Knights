@@ -9,7 +9,7 @@ class Main():
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((Configurations.width,Configurations.height)) 
-        pygame.display.set_caption('Bishop Vs Knight')
+        pygame.display.set_caption('BISHOPS & KNIGHTS')
         
         self.game = Game()
 
@@ -50,13 +50,12 @@ class Main():
                         game.config.change_dimensions('increase')
                         screen = pygame.display.set_mode((Configurations.width,Configurations.height))
                         game=Game()
-                        print("Board size is increased")
 
                     elif event.key == pygame.K_DOWN or event.key == pygame.K_d:
                         game.config.change_dimensions('decrease')
                         screen = pygame.display.set_mode((Configurations.width,Configurations.height))
                         game=Game()
-                        print("Board size is decreased")                    
+                        
                     elif event.key == pygame.K_m:
                         Sound.mute = not Sound.mute
                         if Sound.mute:

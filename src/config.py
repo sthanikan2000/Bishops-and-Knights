@@ -28,13 +28,17 @@ class Configurations:
             Configurations.col += 1
             Configurations.width = Configurations.row * Configurations.sq_size
             Configurations.height = Configurations.col * Configurations.sq_size
+
+            print("Board size is increased")
             Configurations.start_sound.play()
+
         elif type == 'decrease':
             if Configurations.row > 3:
                 Configurations.row -= 1
                 Configurations.col -= 1
                 Configurations.width = Configurations.row * Configurations.sq_size
                 Configurations.height = Configurations.col * Configurations.sq_size
+                print("Board size is decreased")                    
                 Configurations.start_sound.play()
             else:
                 print('Cannot decrease further')
