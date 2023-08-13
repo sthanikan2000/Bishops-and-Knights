@@ -37,16 +37,6 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 - ***Complete game sounds*** from start to end of play which also can be muted.
 - **Planned extension:** *AI opponent for single-player gameplay. i.e., `AI Knight` (coming soon!)*
 
-## Some Gameplay Screenshots
-
-| **Initial Board Look**  | **All the pieces are placed** |
-| ---- | --- |
-| ![Initial Board Look](gameplay-screenshots/Initial.png)  | ![All the pieces are placed](gameplay-screenshots/all-placed.png)    |
-| **Drag Bishop**  | **Knight WON** |
-| ![Drag Bishop](gameplay-screenshots/drag-bishop.png)  | ![Knight WON](gameplay-screenshots/knight-wins.png)    |
-| **Bishop WON**  | **4-dimension GameBoard** |
-| ![Bishop WON](gameplay-screenshots/bishop-wins.png)  | ![4-dimension GameBoard](gameplay-screenshots/4-dimension.png)    |
-
 ## Controls
 - Keyboard inputs for game controls:
   - Press `Q` to Quit the game
@@ -64,8 +54,11 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 - Add additional game modes or variants, such as timed matches or some puzzles.
 - Improve the overall user experience based on feedback and suggestions.
 
+## Do you want to play without looking at the source codes?
+- You can download the executable file(`Bishops&Knights.exe`) with game images, and sounds as a zipped file(`Bishops&Knights.zip`) <a href=""> here.</a>
+- Extract the zipped file and run the executable file(`Bishops&Knights.exe`) to play the game.
 
-## How to Run
+## How to Run if you are not a windows user?
 1. Make sure you have Python 3.x installed on your system.
 2. Clone this repository to your local machine or download the source code as a ZIP file.
 3. Install the necessary dependencies using pip if not installed 
@@ -83,3 +76,14 @@ Contributions to this project are welcome! If you have any bug reports, feature 
 ## License
 This project is licensed under the MIT License.
 Feel free to use, modify, and distribute this code for personal and educational purposes.
+
+## Look at these Some Gameplay Screenshots
+| **Start and reset pop-up image**  | **3-Dimension Initial Board Look** |
+| ---- | --- |
+| ![Start and reset pop-up image](gameplay-screenshots/start-popup-img.png)  | ![3-Dimension Initial Board Look](gameplay-screenshots/initial-board-look.png)    |
+| **Random 3-Dimension Gameplay**  | **Random 4-Dimension Gameplay** |
+| ![Random 3-Dimension Gameplay](gameplay-screenshots/3-dimension.png)  | ![4-Dimension GameBoard](gameplay-screenshots/4-dimension.png)    |
+| **Drag Bishop**  | **Knight WON** |
+| ![Drag Bishop](gameplay-screenshots/drag-bishop.png)  | ![Knight WON](gameplay-screenshots/knight-wins.png)    |
+| **Bishop WON**  | **A win before all placed in 3-Dimension Board** |
+| ![Bishop WON](gameplay-screenshots/bishop-wins.png)  | ![A win before all placed in 3-Dimension Board](gameplay-screenshots/win-before-all-placed.png)    |
