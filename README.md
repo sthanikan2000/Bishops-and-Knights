@@ -56,8 +56,13 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 
 ## Running the Game
 ### Do you want to play without looking at the source codes?
-- You can download the executable file(`Bishops&Knights.exe`) with game images, and sounds as a zipped file(`Bishops&Knights.zip`) <a href="https://github.com/sthanikan2000/Bishops-and-Knights/raw/main/Bishops%26Knights.zip"> here.</a>
-- Extract the zipped file and run the executable file(`Bishops&Knights.exe`) to play the game.
+- Go to <a href="https://github.com/sthanikan2000/Bishops-and-Knights/releases">releases</a> and download the latest release.
+- You can download the executable file(`Bishops&Knights.exe`) with game images, and sounds by downloading zipped file(`Bishops&Knights-SetUp.zip`) from the latest release.
+<br>Extract the zipped file and run the executable file(`Bishops&Knights.exe`) to play the game.
+- If you want to  do installation of the game in your PC, you can download the SetUp file(`Bishops&Knights-SetUp.exe`) from the latest release. 
+<br>Run the SetUp file(`Bishops&Knights-SetUp.exe`) and follow the instructions to install the game.
+<br>After the installation, you can run the game by runnnig the executable file(`Bishops&Knights.exe`) in the installed directory.
+
 
 ### Do you want to look at the source codes and play?
 1. Make sure you have Python 3.x installed on your system.
