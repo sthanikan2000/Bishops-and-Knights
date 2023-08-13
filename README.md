@@ -55,7 +55,7 @@ An ***extended*** version of ***Tic-Tac-Toe*** game introduces new tactical elem
 - Improve the overall user experience based on feedback and suggestions.
 
 ## Do you want to play without looking at the source codes?
-- You can download the executable file(`Bishops&Knights.exe`) with game images, and sounds as a zipped file(`Bishops&Knights.zip`) <a href=""> here.</a>
+- You can download the executable file(`Bishops&Knights.exe`) with game images, and sounds as a zipped file(`Bishops&Knights.zip`) <a href="https://github.com/sthanikan2000/Bishops-and-Knights/raw/main/Bishops%26Knights.zip"> here.</a>
 - Extract the zipped file and run the executable file(`Bishops&Knights.exe`) to play the game.
 
 ## How to Run if you are not a windows user?
