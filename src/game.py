@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 from config import Configurations
 from dragger import Dragger
 
@@ -9,6 +9,8 @@ class Game:
     # The game is played on a nxn board
       
     def __init__(self):
+        self.start_icon_shown = False
+
         self.config= Configurations()
         self.cross_image = self.config.cross # To represent the cross
         self.dot_image = self.config.dot # To represent the dot
@@ -24,9 +26,19 @@ class Game:
         self.isgameOver = False
         self.winner = None
         self.won_config = None 
-
+    
     #show background sqaures
     def show_bg(self,surface): #Here surface is the screen
+
+        if not self.start_icon_shown:
+            img = Configurations.game_icon
+            img = pygame.transform.scale(img, (Configurations.width,Configurations.height))
+            img_center = Configurations.width//2 , Configurations.height//2
+            surface.blit(img,img.get_rect(center=img_center))
+            self.start_icon_shown = True
+            Configurations.start_sound.play() 
+            return
+        
         ROWS = self.config.row
         COLS = self.config.col
         SQ_SIZE = self.config.sq_size

@@ -1,4 +1,4 @@
-import pygame , sys
+import pygame , sys, time
 from config import Configurations
 from game import Game
 from sound import Sound
@@ -10,10 +10,9 @@ class Main():
         pygame.init()
         self.screen = pygame.display.set_mode((Configurations.width,Configurations.height)) 
         pygame.display.set_caption('BISHOPS & KNIGHTS')
-        
-        self.game = Game()
+        pygame.display.set_icon(Configurations.game_icon)
 
-        Configurations.start_sound.play() 
+        self.game = Game()
 
     def mainloop(self):
         screen = self.screen
@@ -24,6 +23,8 @@ class Main():
         while True:
             if game.isgameOver == True:
                 pygame.display.set_caption('Press "R" to RESTART')
+            else:
+                pygame.display.set_caption('BISHOPS & KNIGHTS')
 
             game.show_bg(screen) # Draw the background squares
 
@@ -47,7 +48,6 @@ class Main():
                     if event.key == pygame.K_r:
                         game=Game()
                         print("Game is restarted")
-                        Configurations.start_sound.play() 
 
                     elif event.key == pygame.K_UP or event.key == pygame.K_i:
                         game.config.change_dimensions('increase')
@@ -55,9 +55,9 @@ class Main():
                         game=Game()
 
                     elif event.key == pygame.K_DOWN or event.key == pygame.K_d:
-                        game.config.change_dimensions('decrease')
-                        screen = pygame.display.set_mode((Configurations.width,Configurations.height))
-                        game=Game()
+                        if game.config.change_dimensions('decrease'):
+                            screen = pygame.display.set_mode((Configurations.width,Configurations.height))
+                            game=Game()
 
                     elif event.key == pygame.K_m:
                         Sound.mute = not Sound.mute
@@ -132,7 +132,7 @@ class Main():
                     print("Nothing to DO")
                     Configurations.illegal_sound.play()                    
             pygame.display.update()
-            
+            time.sleep(0.1)
 
 main=Main()
 main.mainloop()
